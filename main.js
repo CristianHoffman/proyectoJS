@@ -1,62 +1,31 @@
-class Productos {
-    constructor(nombre, precio){
-        this.nombre = nombre
-        this.precio = precio
-        }
-    mostrarProducto(){}    
-}
-const producto1 = new Productos ('Alfajor jorgelin', 110);
-const producto2 = new Productos ('Alfajor milka', 120);
-const producto3 = new Productos ('Coca Cola 600ml', 150);
-const producto4 = new Productos ('Huevo Kinder', 220);
-const producto5 = new Productos ('Chupetin Pop', 30);
 
- 
 
-class DetallePedido{
-    constructor(producto, cantidad){
-        this.producto = producto
-        this.cantidad = cantidad
-    }
-    calcularSubtotal(){
-        let subtotal = this.producto.precio * this.cantidad 
-        return subtotal
-    }
-    mostrarDetalle(){}
-}
+const contenedorProductos = document.getElementById("contenedor-productos")
+
+const productos = [
+    {id: 1, nombre: "CocaCola 600ml", precio: 150, img: 'imagenes/cocacola.jpg'},
+    {id: 2, nombre: "Alfajor Jorgelin", precio: 100, img: 'imagenes/jorgelin.jpg'},
+    {id: 3, nombre: "Huevo Kinder", precio: 220, img: 'imagenes/kinder.jpg'},
+    {id: 4, nombre: "Alfajor Milka", precio: 120, img: 'imagenes/milka.jpg'},
+    {id: 5, nombre: "Chupetin Pops", precio: 30, img: 'imagenes/pops.jpg'},
+
+];
 
 
 
-const detallePedido1 = new DetallePedido(producto1, 10)
-const detallePedido2 = new DetallePedido(producto2, 10)
-const detallePedido3 = new DetallePedido(producto3, 20)
-const detallePedido4 = new DetallePedido(producto4, 5)
-const detallePedido5 = new DetallePedido(producto5, 60)
-
-
-class Pedido {
-    constructor(fecha, detalles){
-        this.fecha = fecha
-        this.detalles = detalles
-    }
-    calcularTotal(){
-        let total = 0;
-        for(const pedido of this.detalles){
-            
-            total = total + pedido.calcularSubtotal();
-        }
-        return total;
-    }
-    mostrarPedido(){}
+const mostrarProductos = () => {
+    productos.forEach(producto => {
+        contenedorProductos.innerHTML += `
+            <div class="product-cont">
+                <img class= "img-carrito" src="${producto.img}" />
+                <h2>${producto.nombre}</h2>
+                <p>$${producto.precio}</p>
+                <button id="${producto.id}" class="agregar">Agregar al carrito</button>
+            </div>
+        `;
+    });
 }
 
-const array = [];
-array.shift(detallePedido1);
-array.push(detallePedido2);
-array.push(detallePedido3);
-array.push(detallePedido4);
-array.push(detallePedido5);
+document.addEventListener('DOMContentLoaded', mostrarProductos);
 
-const pedido1 = new Pedido (new Date(), array)
-console.log(pedido1);
 

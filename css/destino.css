@@ -7,4 +7,15 @@
   background: linear-gradient(to right, #1e3c72, #2a5298);
 }
 
+.product-cont {
+  display: inline-block;
+  margin: 100px;
+  color: white;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+}
+
+.img-carrito {
+  width: 300px;
+}
+
 /*# sourceMappingURL=destino.css.map */
