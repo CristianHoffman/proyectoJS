@@ -1,8 +1,19 @@
 
-//////////PRODUCTOS//////////
 const contenedorProductos = document.getElementById("contenedor-productos")
 
-const productos = [
+
+const contenedorCarrito = document.getElementById("carrito")
+
+let carrito = []
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('carrito')){
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        actualizarCarrito()
+    }
+})
+
+const listaProductos = [
     {id: 1, nombre: "CocaCola 600ml", precio: 150, img: 'imagenes/cocacola.jpg'},
     {id: 2, nombre: "Alfajor Jorgelin", precio: 100, img: 'imagenes/jorgelin.jpg'},
     {id: 3, nombre: "Huevo Kinder", precio: 220, img: 'imagenes/kinder.jpg'},
@@ -12,64 +23,54 @@ const productos = [
 
 ];
 
+listaProductos.forEach((producto) =>{
+    const div = document.createElement('div')
+    div.classList.add('producto')
+    div.innerHTML = `
+    <img src= ${producto.img}>
+    <h3>${producto.nombre} </h3>
+    <p class="precioProducto">${producto.precio} </p>
+   <button id="${producto.id}" class="agregar boton">Agregar al carrito</button>
+    `
+    contenedorProductos.appendChild(div)
+   
+})
 
 
-const mostrarProductos = () => {
-    productos.forEach(producto => {
-        contenedorProductos.innerHTML += `
-        
-            <div class="product-cont">
-                 <img class= "img-carrito" src="${producto.img}" />
-                <h2>${producto.nombre}</h2>
-                <p>$${producto.precio}</p>
-                <button id="${producto.id}" class="agregar">Agregar al carrito</button>
-            </div>
-        `;
-    });
-}
-
-
-document.addEventListener('DOMContentLoaded', mostrarProductos);
-
-
-
-//////////MOSTRAR CARRITO //////////
-const carrito = [];
-
-
-const agregarAlCarrito = agr => {
-    if (agr.target.classList.contains('agregar')) {
-        const id = agr.target.id;
-        const producto = productos.find(producto => producto.id == id);
+const agregarAlCarrito = e => {
+    if (e.target.classList.contains('agregar')) {
+        const id = e.target.id;
+        const producto = listaProductos.find(producto => producto.id == id);
         carrito.push(producto);
-        mostrarCarrito();
+        actualizarCarrito();
     }
 }
 
-const mostrarCarrito = () => {
+contenedorProductos.addEventListener('click', agregarAlCarrito);
+
+const eliminarDelCarrito = (e) =>{
+    const item = carrito.find((producto) => producto.id === e)
+    const indice = carrito.indexOf(item)
+    carrito.splice (indice, 1)
+    actualizarCarrito()
+}
+
+const actualizarCarrito = () => {
     const contenedorCarrito = document.getElementById('carrito');
     contenedorCarrito.innerHTML = '<h2>Carrito:</h2>';
     carrito.forEach(producto => {
         contenedorCarrito.innerHTML += `
-            <p>${producto.nombre} = $ ${producto.precio}</p>
-        `;
+            <p>${producto.nombre}</p>
+            <p>Precio: ${producto.precio}</p>
+            <button onclick ="eliminarDelCarrito(${producto.id})" class="btn btn-danger" <i">Eliminar </i></button>
+        `
+        
+        localStorage.setItem('carrito', JSON.stringify(carrito))
     });
+    
 }
 
-
 contenedorProductos.addEventListener('click', agregarAlCarrito);
-
-const form = () => {
-  const contenedorFormulario = document.getElementById("contacto")
-  contenedorFormulario.innerHTML += `
-  <h2> Contactanos </h2>
-  <input type="text">`
-} 
-form()
-
-
-
-
 
 
 
