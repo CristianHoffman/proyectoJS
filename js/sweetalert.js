@@ -1,27 +1,4 @@
-const alertAgregar = () => _
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-  })
-  
-  Toast.fire({
-    icon: 'success',
-    title: 'Se agrego al carrito correctamente'
-  })
-
-
-
-
-
-
-  const alertEliminar = () => {
+const alertEliminar = () => {
     Swal.fire({
         title: '¿Estas seguro de eliminar del carrito?',
         icon: 'warning',
@@ -40,5 +17,16 @@ const Toast = Swal.mixin({
       })
  }
 
+const agregarToastCarrito = () => {
+  toast.success('🦄 Wow so easy!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+}
 
 

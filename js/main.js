@@ -1,6 +1,6 @@
 const contenedorProductos = document.getElementById("contenedor-productos")
 const contenedorCarrito = document.getElementById("carrito")
-// const precioTotal = document.getElementById('precioTotal')
+const precioTotal = document.getElementById('precioTotal')
 
 
 
@@ -33,7 +33,6 @@ const agregarAlCarrito = e => {
         carrito.push(producto);
         actualizarCarrito();
        
-        
     }
 }
 
