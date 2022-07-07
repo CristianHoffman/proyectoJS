@@ -1,5 +1,9 @@
 const contenedorProductos = document.getElementById("contenedor-productos")
 const contenedorCarrito = document.getElementById("carrito")
+// const precioTotal = document.getElementById('precioTotal')
+
+
+
 let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,6 +32,8 @@ const agregarAlCarrito = e => {
         const producto = listaProductos.find(producto => producto.id == id);
         carrito.push(producto);
         actualizarCarrito();
+       
+        
     }
 }
 
@@ -38,6 +44,8 @@ const eliminarDelCarrito = (e) =>{
     const indice = carrito.indexOf(item)
     carrito.splice (indice, 1)
     actualizarCarrito()
+    alertEliminar()
+    
 }
 
 const actualizarCarrito = () => {
@@ -52,11 +60,21 @@ const actualizarCarrito = () => {
         `
         
         localStorage.setItem('carrito', JSON.stringify(carrito))
-    });
-    
+        });
+        
 }
 
+
 contenedorProductos.addEventListener('click', agregarAlCarrito);
+
+precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0) 
+
+
+
+
+
+
+
 
 
 
