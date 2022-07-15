@@ -2,31 +2,18 @@ const contenedorProductos = document.getElementById("contenedor-productos")
 const contenedorCarrito = document.getElementById("carrito")
 const botonVaciar = document.getElementById('vaciar-carrito')
 const precioTotal = document.getElementById('precioTotal')
-let carrito = []
+const contadorCarrito = document.getElementById('contadorCarrito')
+const cantidad = document.getElementById('cantidad')
 
+let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
     localStorage.getItem('carrito') && (carrito = JSON.parse(localStorage.getItem('carrito')))
     actualizarCarrito()
+    
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-    fetchProd()
-  })
-
-const fetchProd = async () => {
-    try {
-      const res = await fetch('productos.json')
-      const data = await res.json()
-      listaProductos(data)
-        } catch (error) {
-        console.log(error)
-      
-    }
-  }
-
-const listaProductos = data => {
-    data.forEach(producto => {
+listaProductos.forEach((producto) => {
         const div = document.createElement('div')
         div.classList.add('producto')
         div.innerHTML = `
@@ -34,13 +21,11 @@ const listaProductos = data => {
         <h3>${producto.nombre} </h3>
         <p class="precioProducto"> $ ${producto.precio} </p>
        <button id="${producto.id}" class="agregar boton">Agregar al carrito</button>
+       
         `
         contenedorProductos.appendChild(div)
        
-        
-    })
-}
-  
+})
 const agregarAlCarrito = e => {
     if (e.target.classList.contains('agregar')) {
         const id = e.target.id;
@@ -71,16 +56,18 @@ const actualizarCarrito = () => {
     contenedorCarrito.innerHTML = '';
     carrito.forEach(producto => {
         contenedorCarrito.innerHTML += `
-        
-            <p>${producto.nombre}</p>
-            <p>Precio: ${producto.precio}</p>
+            <div class="ccc">
+            <p class="text-primary fs-4">${producto.nombre}</p>
+            <p class="nombre-precio">Precio:$ ${producto.precio}</p>
             <button onclick="eliminarDelCarrito(${producto.id})"  class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+
+            </div>
         `});
+        contadorCarrito.innerText = carrito.length
         precioTotal.innerText = carrito.reduce((acc, producto) => acc + producto.cantidad * producto.precio, 0) 
         
 }
 
-contenedorProductos.addEventListener('click', agregarAlCarrito) ;
 
 
 

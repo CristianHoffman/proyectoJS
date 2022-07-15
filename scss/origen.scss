@@ -32,7 +32,7 @@ img {
 .producto {
     max-width: 20%;
     padding: 10px;
-    margin: 10px;
+    
     margin-bottom: 20px;
     box-shadow: 2px 6px 3px 3px rgba(0, 0, 0, 0.3);
     display: inline-block;
@@ -100,7 +100,7 @@ img {
 
 .modal-carrito {
     position: relative;
-    background-color: white;
+    background: linear-gradient(to left, #e0eafc, #cfdef3);
     min-width: 500px;
     padding: 20px;
     margin-top: -100%;
@@ -123,7 +123,7 @@ img {
     font-size: 20px;
     color: royalblue;
     border: none;
-    background-color: white;
+    background: #e0eafc
 }
 .modal-carrito #carritoCerrar:hover {
     cursor: pointer;
@@ -136,8 +136,10 @@ img {
 }
 
 .boton-eliminar {
-    
-    background-color: white;
+    position: relative;
+    left: 250px;
+    top: -55px;
+    background: linear-gradient(to left, #e0eafc, #cfdef3);
     color: red;
     border: none;
     
@@ -149,5 +151,4 @@ img {
 .boton-eliminar:focus {
     outline: none;
 }
-
 
